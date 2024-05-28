@@ -18,9 +18,39 @@ export default defineConfig({
       {
         label: 'Example Guide',
         link: '/guides/example/'
+      },
+      {
+        label: 'Guide - Clifford',
+        link: '/guides/clifford/'
+      },
+      {
+        label: 'Guide - Rover',
+        link: '/guides/rover/'
+      },
+      {
+        label: 'Guide - Spot',
+        link: '/guides/spot/'
       }]
     }, {
       label: 'Reference',
+      items: [
+      // Each item here is one entry in the navigation menu.
+      {
+        label: 'Example Reference',
+        link: '/reference/example/'
+      },
+      {
+        label: 'Reference - 1',
+        link: '/references/reference-1/'
+      },
+      {
+        label: 'Reference - 2',
+        link: '/references/reference-2/'
+      },
+      {
+        label: 'Reference - 3',
+        link: '/references/reference-3/'
+      }],
       autogenerate: {
         directory: 'reference'
       }
