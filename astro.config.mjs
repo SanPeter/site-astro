@@ -24,7 +24,10 @@ export default defineConfig({
       autogenerate: {
         directory: 'reference'
       }
-    }]
+    }],
+    customCss: [
+      './src/styles/global.css',
+    ]
   }), 
   svelte(),
   UnoCSS({

@@ -8,7 +8,7 @@
 
 <style>
     h1{
-        --at-apply: text-purple-50
+        --at-apply: text-blue-400
     }
 </style>
 
