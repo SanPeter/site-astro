@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let reference : { title: string, slug: string, content: string };
+    export let reference : Reference;
 </script>
 
 <p>Reference content goes here this Svelte component...</p>
