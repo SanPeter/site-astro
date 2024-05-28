@@ -6,4 +6,10 @@
     let message: string = process.env.MESSAGE || '';
 </script>
 
+<style>
+    h1{
+        --at-apply: text-blue-400
+    }
+</style>
+
 <h1>Hello {message}!</h1>
