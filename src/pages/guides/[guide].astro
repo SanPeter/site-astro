@@ -1,0 +1,16 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+export function getStaticPaths() {
+  return [
+    {params: {guide: 'clifford'}},
+    {params: {guide: 'rover'}},
+    {params: {guide: 'spot'}},
+  ];
+}
+
+const {guide} = Astro.params;
+---
+<StarlightPage frontmatter={{title: `Good dog, ${guide}!`}}>
+  <h1>Good dog, {guide}!</h1>
+</StarlightPage>  
