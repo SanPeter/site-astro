@@ -1,0 +1,60 @@
+---
+import type { IArticlePage, IArticlePageItem } from '@/types/articlepage';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import dotenv from 'dotenv';
+
+export async function getStaticPaths() {
+    dotenv.config();
+
+    const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        query: `query ArticlePageQuery {
+            ArticlePage (
+                limit: 40
+            )
+            {
+            __typename
+            items {
+                _metadata {
+                    displayName
+                } 
+                Title
+                PublishDate
+                Featured
+                Description
+                OGImage {
+                    base
+                    default
+                    hierarchical
+                }
+                ArticleBody {
+                    html
+                }
+            }
+            }
+        }`,
+    }),
+};   
+    
+    let articles = await (await fetch(`${process.env.API_ENDPOINT || ''}?auth=${process.env.API_KEY || ''}`, options)).json() as Promise<IArticlePage>;
+    // console.log(articles)
+
+    // articles.data.ArticlePage.items.forEach((element : IArticlePageItem) => {
+    //     console.log(element._metadata.displayName);
+    // });
+
+    return (await articles).data.ArticlePage.items.map((article : IArticlePageItem) => ({
+        params: { slug: article._metadata.displayName },
+        props: { article: article },
+    }));
+};
+
+const {article} : { article: IArticlePageItem } = Astro.props;
+---
+
+<StarlightPage frontmatter={{ title: article.Title }}>
+</StarlightPage>
