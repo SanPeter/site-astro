@@ -11,6 +11,7 @@ export interface IArticlePage {
 export interface IArticlePageItem {
     _metadata: {
         displayName: string;
+        routeSegment: string;
     }
     Title: string;
     PublishDate: string;

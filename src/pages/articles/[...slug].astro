@@ -21,6 +21,9 @@ export async function getStaticPaths() {
             items {
                 _metadata {
                     displayName
+                    ... on InstanceMetadata {
+                         routeSegment
+                    }
                 } 
                 Title
                 PublishDate
@@ -44,11 +47,11 @@ export async function getStaticPaths() {
     // console.log(articles)
 
     // articles.data.ArticlePage.items.forEach((element : IArticlePageItem) => {
-    //     console.log(element._metadata.displayName);
+    //     console.log(`${element._metadata.displayName} - ${element._metadata.routeSegment}`);
     // });
 
     return (await articles).data.ArticlePage.items.map((article : IArticlePageItem) => ({
-        params: { slug: article._metadata.displayName },
+        params: { slug: article._metadata.routeSegment },
         props: { article: article },
     }));
 };
