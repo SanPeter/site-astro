@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "node deploy.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -20,6 +21,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "ftp-deploy": "^2.4.7",
     "unocss": "^0.60.3"
   }
 }
