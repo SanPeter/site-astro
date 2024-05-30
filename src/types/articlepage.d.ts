@@ -5,7 +5,6 @@ export interface IArticlePage {
             items: IArticlePageItem[];
         }
     }
-
 };
 
 export interface IArticlePageItem {
