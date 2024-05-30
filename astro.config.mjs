@@ -9,7 +9,8 @@ export default defineConfig({
   integrations: [starlight({
     title: 'Éric St-Pierre',
     social: {
-      github: 'https://github.com/withastro/starlight'
+      github: 'https://github.com/SanPeter',
+      linkedin: 'https://www.linkedin.com/in/%C3%A9ric-st-pierre-0aa167145',
     },
     sidebar: [{
       label: 'Caching',
