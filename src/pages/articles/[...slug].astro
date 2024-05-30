@@ -59,5 +59,8 @@ export async function getStaticPaths() {
 const {article} : { article: IArticlePageItem } = Astro.props;
 ---
 
-<StarlightPage frontmatter={{ title: article.Title }}>
+<StarlightPage frontmatter={{ title: article.Title , lastUpdated: new Date(article.PublishDate)}}>
+
+        <div set:html={article.ArticleBody.html}></div>
+
 </StarlightPage>

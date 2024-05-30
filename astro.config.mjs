@@ -57,7 +57,9 @@ export default defineConfig({
     }],
     customCss: [
       './src/styles/global.css',
-    ]
+    ],
+    lastUpdated: true,
+    tableOfContents: false,
   }), 
   svelte(),
   UnoCSS({

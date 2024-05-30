@@ -14,7 +14,7 @@ export interface IArticlePageItem {
         routeSegment: string;
     }
     Title: string;
-    PublishDate: string;
+    PublishDate: date;
     Featured: boolean;
     Description: string;
     OGImage: {
