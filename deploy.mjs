@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const __localroot = __dirname + '/dist';
 
 const ftpDeploy = new FtpDeploy();
-const result = dotenv.config();
+dotenv.config();
 
 const config = {
   user: process.env.FTP_USER,
