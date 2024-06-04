@@ -1,11 +1,9 @@
 ---
 import type { IArticlePage, IArticlePageItem } from '@/types/articlepage';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import dotenv from 'dotenv';
+import { loadEnv } from "vite";
 
 export async function getStaticPaths() {
-    dotenv.config();
-
     const options = {
     method: 'POST',
     headers: {
@@ -41,14 +39,12 @@ export async function getStaticPaths() {
             }
         }`,
     }),
-};   
-    
-    let articles = await (await fetch(`${process.env.API_ENDPOINT || ''}?auth=${process.env.API_KEY || ''}`, options)).json() as Promise<IArticlePage>;
-    // console.log(articles)
+    };   
 
-    // articles.data.ArticlePage.items.forEach((element : IArticlePageItem) => {
-    //     console.log(`${element._metadata.displayName} - ${element._metadata.routeSegment}`);
-    // });
+    const { API_ENDPOINT } = loadEnv(process.env.API_ENDPOINT || '', process.cwd(), "");
+    const { API_KEY } = loadEnv(process.env.API_KEY || '', process.cwd(), "");
+    
+    let articles = await (await fetch(`${API_ENDPOINT}?auth=${API_KEY}`, options)).json() as Promise<IArticlePage>;
 
     return (await articles).data.ArticlePage.items.map((article : IArticlePageItem) => ({
         params: { slug: article._metadata.routeSegment },

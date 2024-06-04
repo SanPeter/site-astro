@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { loadEnv } from 'vite';
 
 import svelte from "@astrojs/svelte";
 import UnoCSS from 'unocss/astro'
+
+const { GOOGLE_ID } = loadEnv(process.env.GOOGLE_ID || '', process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
@@ -164,6 +167,24 @@ export default defineConfig({
     ],
     lastUpdated: true,
     tableOfContents: false,
+    head: [
+      {
+        tag: 'script',
+        attrs: {
+          async: 'true', 
+          src: `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ID}`
+        },
+      },
+      {
+        tag: 'script',
+        content: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GOOGLE_ID}');
+        `
+      }
+    ],
   }), 
   svelte(),
   UnoCSS({
