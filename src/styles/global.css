@@ -1,5 +1,6 @@
 :root {
-    .sl-markdown-content h1:not(:where(.not-content *)) {
-        font-size: var(--sl-text-4xl);
+    .sl-markdown-content pre:not(:where(.not-content *)) {
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
     }
-  }
+}   
