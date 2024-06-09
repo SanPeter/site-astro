@@ -1,0 +1,51 @@
+---
+import type { IPrismExamplePage, IPrismExamplePageItem } from '@/types/prismexamplepage';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { loadEnv } from "vite";
+
+export async function getStaticPaths() {
+    const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        query: `query MyQuery {
+            PrismExamplePage {
+                items {
+                _metadata {
+                    displayName
+                    ... on InstanceMetadata {
+                         routeSegment
+                    }
+                } 
+                Title
+                Body {
+                    html
+                }
+                }
+            }
+        }`,
+    }),
+    };   
+
+    const { API_ENDPOINT } = loadEnv(process.env.API_ENDPOINT || '', process.cwd(), "");
+    const { API_KEY } = loadEnv(process.env.API_KEY || '', process.cwd(), "");
+    
+    let example = await (await fetch(`${API_ENDPOINT}?auth=${API_KEY}`, options)).json() as Promise<IPrismExamplePage>;
+
+    return (await example).data.PrismExamplePage.items.map((page : IPrismExamplePageItem) => ({
+        params: { slug: page._metadata.routeSegment },
+        props: { page: page },
+    }));
+};
+
+const {page} : { page: IPrismExamplePageItem } = Astro.props;
+
+---
+
+<StarlightPage frontmatter={{ title: page.Title }}>
+
+    <div set:html={page.Body.html}></div>
+
+</StarlightPage>

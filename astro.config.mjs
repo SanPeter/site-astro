@@ -164,6 +164,7 @@ export default defineConfig({
     }],
     customCss: [
       './src/styles/global.css',
+      './src/styles/prism-nord.css'
     ],
     lastUpdated: true,
     tableOfContents: false,
@@ -183,6 +184,12 @@ export default defineConfig({
           gtag('js', new Date());
           gtag('config', '${GOOGLE_ID}');
         `
+      },
+      {
+        tag: 'script',
+        attrs: {
+          src: `/prism.js`
+        },
       }
     ],
   }), 
@@ -190,5 +197,8 @@ export default defineConfig({
   UnoCSS({
     injectReset: true,
   }),
-]
+  ],
+  markdown: {
+    syntaxHighlight: 'prism',
+  }
 });
